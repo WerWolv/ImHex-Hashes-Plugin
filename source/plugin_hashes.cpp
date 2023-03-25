@@ -8,6 +8,7 @@
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wsign-compare"
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #include <HashFactory.h>
 #pragma GCC diagnostic pop
 
@@ -163,7 +164,7 @@ namespace {
         int m_hashSize = 0, m_hashRounds = 0;
     };
 
-    template<typename T1, typename T2>
+    template<typename Config, typename T1, typename T2>
     class HashBlake2 : public ContentRegistry::Hashes::Hash {
     public:
         using FactoryFunction = IHash(*)(T1 a_Config, T2 a_TreeConfig);
@@ -191,7 +192,7 @@ namespace {
                     case 7: hashSize = 64; break;
                 }
 
-                T1 config = {};
+                auto config = Config::GetDefaultConfig();
                 config->SetKey(key);
                 config->SetSalt(salt);
                 config->SetPersonalization(personalization);
@@ -259,8 +260,8 @@ IMHEX_PLUGIN_SETUP("Extra Hashes", "WerWolv", "Plugin adding many extra hash fun
     hex::ContentRegistry::Hashes::add<HashTiger>("Tiger", HashFactory::Crypto::CreateTiger);
     hex::ContentRegistry::Hashes::add<HashTiger>("Tiger2", HashFactory::Crypto::CreateTiger2);
 
-    hex::ContentRegistry::Hashes::add<HashBlake2<IBlake2BConfig, IBlake2BTreeConfig>>("Blake2B", HashFactory::Crypto::CreateBlake2B);
-    hex::ContentRegistry::Hashes::add<HashBlake2<IBlake2SConfig, IBlake2STreeConfig>>("Blake2S", HashFactory::Crypto::CreateBlake2S);
+    hex::ContentRegistry::Hashes::add<HashBlake2<Blake2BConfig, IBlake2BConfig, IBlake2BTreeConfig>>("Blake2B", HashFactory::Crypto::CreateBlake2B);
+    hex::ContentRegistry::Hashes::add<HashBlake2<Blake2SConfig, IBlake2SConfig, IBlake2STreeConfig>>("Blake2S", HashFactory::Crypto::CreateBlake2S);
 
 }
 
