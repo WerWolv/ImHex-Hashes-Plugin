@@ -1,3 +1,6 @@
 [submodule "ImHex"]
 	path = ImHex
 	url = https://github.com/WerWolv/ImHex
+[submodule "external/HashLibPlus"]
+	path = external/HashLibPlus
+	url = https://github.com/ron4fun/HashLibPlus

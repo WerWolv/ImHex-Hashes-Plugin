@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 set(CMAKE_CXX_STANDARD 20)
 
 # Change this to the name of your plugin #
-project(example_cpp)
+project(extra_hashes)
 
 # Include ImHex cmake module #
 set(IMHEX_BASE_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/ImHex)
@@ -15,13 +15,17 @@ addVersionDefines()
 
 # Add your source files here #
 add_library(${PROJECT_NAME} SHARED
-        source/plugin_example.cpp
+        source/plugin_hashes.cpp
 )
+
+add_subdirectory(external/HashLibPlus)
+
+target_compile_options(hashplus PRIVATE -Wno-unknown-pragmas -Wno-unused-parameter)
 
 # Add additional include directories here #
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 # Add additional libraries here #
-target_link_libraries(${PROJECT_NAME} PRIVATE)
+target_link_libraries(${PROJECT_NAME} PRIVATE hashplus)
 
 
 
