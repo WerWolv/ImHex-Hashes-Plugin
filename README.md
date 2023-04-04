@@ -1,13 +1,38 @@
-# ImHex C++ Plugin Template
+# Extra Hashes
 
-This repository is a template repository for building plugins for ImHex in C++.
-
-## Building
-
-Building a plugin works similarly to building ImHex. Make sure you have all dependencies installed that are necessary to build ImHex itself. Afterwards simply use cmake in the top level of this repository to build libimhex and the plugin. Consult the ImHex README.md for a more in-depth guide on how to compile ImHex using cmake.
-
-## Notice
-
-Plugins can depend on the ImHex version you're using. To find out what commit the plugin was built for, check the commit hash next to the ImHex submodule.
-
-![image](https://user-images.githubusercontent.com/10835354/144566767-31c39e72-2d08-42b1-a38b-dcba44939ac9.png)
+This plugin uses HashLibPlus to add various new hash functions to the Hashes view.
+Currently supported functions are:
+- Adler32
+- AP
+- -BKDR
+- Bernstein
+- Bernstein1
+- DEK
+- DJB
+- ELF
+- FNV1a_32
+- FNV32
+- HS
+- OneAtTime
+- PJW
+- Rotating
+- RS
+- SDBM
+- ShiftAndXor
+- SuperFast
+- Murmur2_32
+- MurmurHash2_x86_32
+- XXHash32
+- Jenkins3
+- FNV64
+- FNV1a_64
+- Murmur2_64
+- SpiHash64_2_4
+- XXHash64
+- SpiHash128_2_4
+- MurmurHash3_x86_128
+- MurmurHash3_x64_128
+- Tiger
+- Tiger2
+- Blake2B
+- Blake2S
