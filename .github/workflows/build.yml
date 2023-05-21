@@ -85,12 +85,12 @@ jobs:
           ..
         mingw32-make -j4 install
 
-    - name: ⬆️ Upload Portable ZIP
+    - name: ⬆️ Upload Windows x86_64 artifact
       uses: actions/upload-artifact@v3
       with:
-        name: Windows x86_64
+        name: Windows Plugin
         path: |
-          build/install/plugins/!(builtin|windows).hexplug
+          install/plugins/!(builtin|windows).hexplug
 
   # MacOS build
   macos:
@@ -155,11 +155,11 @@ jobs:
           ..
         make -j4 install
 
-    - name: ⬆️ Upload DMG
+    - name: ⬆️ Upload macOS x86_64 artifact
       uses: actions/upload-artifact@v3
       with:
-        name: macOS x86_64
-        path: build/install/plugins/!(builtin|windows).hexplug
+        name: macOS Plugin
+        path: install/plugins/!(builtin|windows).hexplug
 
   # Ubuntu build
   ubuntu:
@@ -213,11 +213,11 @@ jobs:
         run: |
           echo "IMHEX_VERSION=`cat ImHex/VERSION`" >> $GITHUB_ENV
 
-      - name: ⬆️ Upload DEB
+      - name: ⬆️ Upload Debian x86_64 artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Ubuntu 22.04 DEB x86_64
-          path: build/install/plugins/!(builtin|windows).hexplug
+          name: Ubuntu Plugin
+          path: install/plugins/!(builtin|windows).hexplug
 
   # ArchLinux build
   archlinux-build:
@@ -281,9 +281,9 @@ jobs:
         run: |
           echo "IMHEX_VERSION=`cat ImHex/VERSION`" >> $GITHUB_ENV
 
-      - name: ⬆️ Upload Arch package
+      - name: ⬆️ Upload ArchLinux x86_64 artifact
         uses: actions/upload-artifact@v3
         with:
-          name: ArchLinux .pkg.tar.zst x86_64
+          name: ArchLinux Plugin
           path: |
-            build/install/plugins/!(builtin|windows).hexplug
+            install/plugins/!(builtin|windows).hexplug
