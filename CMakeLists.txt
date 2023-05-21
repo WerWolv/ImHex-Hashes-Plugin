@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
 # Change this to the name of your plugin #
 project(extra_hashes)
@@ -11,7 +11,7 @@ include("${IMHEX_BASE_FOLDER}/cmake/build_helpers.cmake")
 
 # Include ImHex
 add_subdirectory(${IMHEX_BASE_FOLDER})
-addVersionDefines()
+addDefines()
 
 # Add your source files here #
 add_library(${PROJECT_NAME} SHARED
