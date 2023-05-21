@@ -72,7 +72,6 @@ jobs:
 
         cmake -G "MinGW Makefiles"                      \
           -DCMAKE_BUILD_TYPE=$BUILD_TYPE                \
-          -DCMAKE_INSTALL_PREFIX="$PWD/install"         \
           -DCREATE_PACKAGE=ON                           \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache            \
           -DCMAKE_CXX_COMPILER_LAUNCHER=ccache          \
@@ -83,14 +82,14 @@ jobs:
           -DIMHEX_COMMIT_HASH_LONG="${GITHUB_SHA}"      \
           -DIMHEX_COMMIT_BRANCH="${GITHUB_REF##*/}"     \
           ..
-        mingw32-make -j4 install
+        mingw32-make -j
 
     - name: ⬆️ Upload Windows x86_64 artifact
       uses: actions/upload-artifact@v3
       with:
         name: Windows Plugin
         path: |
-          install/plugins/!(builtin|windows).hexplug
+          build/plugins/!(builtin|windows).hexplug
 
   # MacOS build
   macos:
@@ -141,7 +140,6 @@ jobs:
           -DCMAKE_BUILD_TYPE=$BUILD_TYPE                                                            \
           -DCREATE_BUNDLE=ON                                                                        \
           -DCREATE_PACKAGE=ON                                                                       \
-          -DCMAKE_INSTALL_PREFIX="$PWD/install"                                                     \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache                                                        \
           -DCMAKE_CXX_COMPILER_LAUNCHER=ccache                                                      \
           -DCMAKE_OBJC_COMPILER_LAUNCHER=ccache                                                     \
@@ -153,13 +151,13 @@ jobs:
           -DCMAKE_OSX_DEPLOYMENT_TARGET="10.10"                                                     \
           -DCPACK_PACKAGE_FILE_NAME="imhex-${{env.IMHEX_VERSION}}-macOS${{matrix.suffix}}-x86_64"   \
           ..
-        make -j4 install
+        make -j
 
     - name: ⬆️ Upload macOS x86_64 artifact
       uses: actions/upload-artifact@v3
       with:
         name: macOS Plugin
-        path: install/plugins/!(builtin|windows).hexplug
+        path: build/plugins/!(builtin|windows).hexplug
 
   # Ubuntu build
   ubuntu:
@@ -198,7 +196,6 @@ jobs:
           cd build
           CC=gcc-12 CXX=g++-12 cmake                      \
             -DCMAKE_BUILD_TYPE=$BUILD_TYPE                \
-            -DCMAKE_INSTALL_PREFIX="$PWD/install"         \
             -DCMAKE_C_COMPILER_LAUNCHER=ccache            \
             -DCMAKE_CXX_COMPILER_LAUNCHER=ccache          \
             -DIMHEX_PATTERNS_PULL_MASTER=ON               \
@@ -207,7 +204,7 @@ jobs:
             -DIMHEX_COMMIT_BRANCH="${GITHUB_REF##*/}"     \
             -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON       \
             ..
-          make -j 4 install DESTDIR=DebDir
+          make -j
 
       - name: 📜 Set version variable
         run: |
@@ -217,7 +214,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Ubuntu Plugin
-          path: install/plugins/!(builtin|windows).hexplug
+          path: build/plugins/!(builtin|windows).hexplug
 
   # ArchLinux build
   archlinux-build:
@@ -266,7 +263,6 @@ jobs:
           cd build
           CC=gcc CXX=g++ cmake                          \
           -DCMAKE_BUILD_TYPE=$BUILD_TYPE                \
-          -DCMAKE_INSTALL_PREFIX="$PWD/install"         \
           -DCMAKE_C_COMPILER_LAUNCHER=ccache            \
           -DCMAKE_CXX_COMPILER_LAUNCHER=ccache          \
           -DIMHEX_PATTERNS_PULL_MASTER=ON               \
@@ -275,7 +271,7 @@ jobs:
           -DIMHEX_COMMIT_BRANCH="${GITHUB_REF##*/}"     \
           -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON       \
           ..
-          make -j 4 install
+          make -j
 
       - name: 📜 Set version variable
         run: |
@@ -286,4 +282,4 @@ jobs:
         with:
           name: ArchLinux Plugin
           path: |
-            install/plugins/!(builtin|windows).hexplug
+            build/plugins/!(builtin|windows).hexplug
