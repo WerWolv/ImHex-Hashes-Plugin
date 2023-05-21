@@ -83,13 +83,16 @@ jobs:
           -DIMHEX_COMMIT_BRANCH="${GITHUB_REF##*/}"     \
           ..
         mingw32-make -j
+        
+        rm plugins/builtin.hexplug
+        rm plugins/windows.hexplug
 
     - name: ⬆️ Upload Windows x86_64 artifact
       uses: actions/upload-artifact@v3
       with:
         name: Windows Plugin
         path: |
-          build/plugins/!(builtin|windows).hexplug
+          build/plugins/*.hexplug
 
   # MacOS build
   macos:
@@ -152,12 +155,14 @@ jobs:
           -DCPACK_PACKAGE_FILE_NAME="imhex-${{env.IMHEX_VERSION}}-macOS${{matrix.suffix}}-x86_64"   \
           ..
         make -j
+        
+        rm plugins/builtin.hexplug
 
     - name: ⬆️ Upload macOS x86_64 artifact
       uses: actions/upload-artifact@v3
       with:
         name: macOS Plugin
-        path: build/plugins/!(builtin|windows).hexplug
+        path: build/plugins/*.hexplug
 
   # Ubuntu build
   ubuntu:
@@ -205,6 +210,8 @@ jobs:
             -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON       \
             ..
           make -j
+          
+          rm plugins/builtin.hexplug
 
       - name: 📜 Set version variable
         run: |
@@ -214,7 +221,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Ubuntu Plugin
-          path: build/plugins/!(builtin|windows).hexplug
+          path: build/plugins/*.hexplug
 
   # ArchLinux build
   archlinux-build:
@@ -272,6 +279,8 @@ jobs:
           -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON       \
           ..
           make -j
+          
+          rm plugins/builtin.hexplug
 
       - name: 📜 Set version variable
         run: |
@@ -282,4 +291,4 @@ jobs:
         with:
           name: ArchLinux Plugin
           path: |
-            build/plugins/!(builtin|windows).hexplug
+            build/plugins/*.hexplug
