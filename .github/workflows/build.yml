@@ -159,7 +159,9 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: macOS Plugin
-        path: build/imhex.app/Contents/MacOS/plugins/*.hexplug
+        path: |
+          build/*
+          imhex.app/*
 
   # Ubuntu build
   ubuntu:
@@ -218,7 +220,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Ubuntu Plugin
-          path: build/plugins/*.hexplug
+          path: build/*
 
   # ArchLinux build
   archlinux-build:
@@ -288,4 +290,4 @@ jobs:
         with:
           name: ArchLinux Plugin
           path: |
-            build/plugins/*.hexplug
+            build/*
