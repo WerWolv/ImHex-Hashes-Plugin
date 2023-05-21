@@ -123,7 +123,7 @@ jobs:
 
     - name: ⬇️ Install dependencies
       run: |
-        brew bundle --no-lock --file dist/Brewfile
+        brew bundle --no-lock --file ImHex/dist/Brewfile
         rm -rf /usr/local/Cellar/capstone
 
     # MacOS cmake build
@@ -189,7 +189,7 @@ jobs:
       - name: ⬇️ Install dependencies
         run: |
           sudo apt update
-          sudo bash dist/get_deps_debian.sh
+          sudo bash ImHex/dist/get_deps_debian.sh
 
       # Ubuntu cmake build
       - name: 🛠️ Build
@@ -243,7 +243,7 @@ jobs:
 
       - name: ⬇️ Install ImHex dependencies
         run: |
-          dist/get_deps_archlinux.sh --noconfirm
+          ImHex/dist/get_deps_archlinux.sh --noconfirm
 
       - name: 📜 Setup ccache
         uses: hendrikmuhs/ccache-action@v1.2
