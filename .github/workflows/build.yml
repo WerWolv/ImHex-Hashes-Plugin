@@ -153,13 +153,13 @@ jobs:
           ..
         make -j4
         
-        rm plugins/builtin.hexplug
+        rm imhex.app/Contents/MacOS/plugins/builtin.hexplug
 
     - name: ⬆️ Upload macOS x86_64 artifact
       uses: actions/upload-artifact@v3
       with:
         name: macOS Plugin
-        path: build/plugins/*.hexplug
+        path: build/imhex.app/Contents/MacOS/plugins/*.hexplug
 
   # Ubuntu build
   ubuntu:
