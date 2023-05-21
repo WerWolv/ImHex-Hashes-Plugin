@@ -152,16 +152,13 @@ jobs:
           -DCMAKE_OSX_DEPLOYMENT_TARGET="10.10"                                                     \
           ..
         make -j4
-        
-        rm imhex.app/Contents/MacOS/plugins/builtin.hexplug
 
     - name: ⬆️ Upload macOS x86_64 artifact
       uses: actions/upload-artifact@v3
       with:
         name: macOS Plugin
         path: |
-          build/*
-          imhex.app/*
+          build/*.hexplug
 
   # Ubuntu build
   ubuntu:
@@ -210,7 +207,6 @@ jobs:
             ..
           make -j4
           
-          rm plugins/builtin.hexplug
 
       - name: 📜 Set version variable
         run: |
@@ -220,7 +216,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Ubuntu Plugin
-          path: build/*
+          path: build/*.hexplug
 
   # ArchLinux build
   archlinux-build:
@@ -278,8 +274,6 @@ jobs:
           -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON       \
           ..
           make -j4
-          
-          rm plugins/builtin.hexplug
 
       - name: 📜 Set version variable
         run: |
@@ -290,4 +284,4 @@ jobs:
         with:
           name: ArchLinux Plugin
           path: |
-            build/*
+            build/*.hexplug
